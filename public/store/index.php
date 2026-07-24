@@ -361,5 +361,49 @@ else
 
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            const nama = form.querySelector('[name="nama"]')?.value || '';
+            const tempat = form.querySelector('[name="tempat_lahir"]')?.value || form.querySelector('[name="tempat"]')?.value || '';
+            const tgl = form.querySelector('[name="tanggal_lahir"]')?.value || form.querySelector('[name="tgl"]')?.value || '';
+            const jk = form.querySelector('[name="jk"]:checked')?.value || 'Laki-laki';
+            const alamat = form.querySelector('[name="alamat"]')?.value || '';
+            const sekolah = form.querySelector('[name="sekolah"]:checked')?.value || form.querySelector('[name="sekolah"]')?.value || 'SMA';
+            const nama_sekolah = form.querySelector('[name="sekolah_nama"]')?.value || form.querySelector('[name="nama_sekolah"]')?.value || '-';
+            const mtk = form.querySelector('[name="mtk"]')?.value || '0';
+            const inggris = form.querySelector('[name="inggris"]')?.value || '0';
+            const indo = form.querySelector('[name="indo"]')?.value || '0';
+            const pil1 = form.querySelector('[name="jurusan1"]')?.value || form.querySelector('[name="pil1"]')?.value || '-';
+            const pil2 = form.querySelector('[name="jurusan2"]')?.value || form.querySelector('[name="pil2"]')?.value || '-';
+            const alasan = form.querySelector('[name="alasan"]')?.value || '-';
+
+            if (nama.trim() !== '') {
+                let localData = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]');
+                const newItem = {
+                    id: Date.now(),
+                    nama: nama,
+                    tempat_lahir: tempat,
+                    tanggal_lahir: tgl,
+                    jk: jk,
+                    alamat: alamat,
+                    sekolah_asal: sekolah,
+                    nama_sekolah: nama_sekolah,
+                    matematika: mtk,
+                    inggris: inggris,
+                    indonesia: indo,
+                    pilihan1: pil1,
+                    pilihan2: pil2,
+                    alasan: alasan
+                };
+                localData.unshift(newItem);
+                localStorage.setItem('uts_pendaftarans', JSON.stringify(localData));
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
