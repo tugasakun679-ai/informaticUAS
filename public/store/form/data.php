@@ -123,6 +123,16 @@ include "koneksi.php";
             <tbody>
             <?php
             $no = 1;
+            $check = @mysqli_query($koneksi, "SELECT COUNT(*) as cnt FROM pendaftarans");
+            $row_cnt = $check ? mysqli_fetch_assoc($check)['cnt'] : 0;
+
+            if ($row_cnt == 0) {
+                @mysqli_query($koneksi, "INSERT INTO pendaftarans (nama, tempat_lahir, tanggal_lahir, jk, alamat, sekolah_asal, nama_sekolah, matematika, inggris, indonesia, pilihan1, pilihan2, alasan, created_at, updated_at) VALUES
+                ('Ahmad Fauzi', 'Jakarta', '2002-05-14', 'Laki-laki', 'Jl. Merdeka No. 10, Jakarta Pusat', 'SMA', 'SMAN 1 Jakarta', 88, 90, 92, 'Teknik Informatika', 'Sistem Informasi', 'Berminat pada pengembangan perangkat lunak dan kecerdasan buatan.', NOW(), NOW()),
+                ('Siti Nurhaliza', 'Bandung', '2003-08-22', 'Perempuan', 'Jl. Asia Afrika No. 45, Bandung', 'SMA', 'SMAN 3 Bandung', 95, 92, 94, 'Teknik Informatika', 'Data Science', 'Ingin memperdalam ilmu analisis data dan machine learning.', NOW(), NOW()),
+                ('Budi Santoso', 'Surabaya', '2002-11-10', 'Laki-laki', 'Jl. Pemuda No. 12, Surabaya', 'SMK', 'SMKN 1 Surabaya', 82, 85, 88, 'Sistem Informasi', 'Teknik Informatika', 'Tertarik dengan manajemen sistem dan arsitektur database.', NOW(), NOW())");
+            }
+
             $data = mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
 
             if ($data && mysqli_num_rows($data) > 0) {

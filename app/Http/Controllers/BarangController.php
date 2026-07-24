@@ -14,6 +14,13 @@ class BarangController extends Controller
      */
     public function shop(Request $request)
     {
+        // Auto seed database if table is empty (e.g. fresh deployment)
+        if (Barang::count() === 0) {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+            } catch (\Throwable $e) {}
+        }
+
         $query = Barang::query();
 
         if ($request->filled('q')) {
