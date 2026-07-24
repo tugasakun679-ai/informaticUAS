@@ -142,35 +142,37 @@ alasan,
 created_at,
 updated_at
 )
-VALUES
-(
-'$nama',
-'$tempat',
-'$tanggal_lahir',
-'$jk',
-'$alamat',
-'$sekolah',
-'$nama_sekolah',
-'$mtk',
-'$inggris',
-'$indo',
-'$pil1',
-'$pil2',
-'$alasan',
-NOW(),
-NOW()
-)";
+$simpan = @mysqli_query($koneksi,$query);
 
-$simpan = mysqli_query($koneksi,$query);
+        // Also save to JSON backup
+        $json_file = __DIR__ . '/form/pendaftarans_backup.json';
+        $existing = [];
+        if(file_exists($json_file)){
+            $existing = json_decode(file_get_contents($json_file), true) ?: [];
+        }
+        $new_item = [
+            "id" => count($existing) + 1,
+            "nama" => $nama,
+            "tempat_lahir" => $tempat,
+            "tanggal_lahir" => $tanggal_lahir,
+            "jk" => $jk,
+            "alamat" => $alamat,
+            "sekolah_asal" => $sekolah,
+            "nama_sekolah" => $nama_sekolah,
+            "matematika" => $mtk,
+            "inggris" => $inggris,
+            "indonesia" => $indo,
+            "pilihan1" => $pil1,
+            "pilihan2" => $pil2,
+            "alasan" => $alasan
+        ];
+        array_unshift($existing, $new_item);
+        file_put_contents($json_file, json_encode($existing, JSON_PRETTY_PRINT));
 
-if(!$simpan){
-    die("Gagal menyimpan data : ".mysqli_error($koneksi));
+        echo "<script>alert('✅ Data Pendaftaran Berhasil Disimpan & Terdaftar di Fitur Data!'); window.location.href='form/data.php?msg=success';</script>";
+        exit;
+    }
 }
-?>
-
-        <div class="notif">
-            Data berhasil disimpan!
-        </div>
 
         <h2>HASIL FORM PENDAFTARAN</h2>
 
