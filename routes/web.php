@@ -43,6 +43,8 @@ Route::prefix('uas')->group(function () {
     // Form Pendaftaran (customer-facing, but part of UAS admin system)
     Route::get('/daftar', [PendaftaranController::class, 'create'])->name('uas.daftar.create');
     Route::post('/daftar', [PendaftaranController::class, 'store'])->name('uas.daftar.store');
+});
+
 // Helper route to seed database on Railway if needed
 Route::get('/seed-database', function () {
     try {
@@ -53,3 +55,4 @@ Route::get('/seed-database', function () {
         return response('Error: ' . $e->getMessage(), 500);
     }
 });
+
