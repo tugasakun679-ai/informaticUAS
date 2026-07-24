@@ -104,7 +104,7 @@
 
                 <!-- CTA Button -->
                 <div class="pt-8">
-                    <a href="{{ asset('store/index.html') }}" class="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-sm rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg shadow-amber-500/5">
+                    <a href="/store/index.html" class="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-sm rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg shadow-amber-500/5">
                         <span>Buka Project UTS</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
@@ -153,7 +153,7 @@
 
                 <!-- CTA Button -->
                 <div class="pt-8">
-                    <a href="{{ route('uas.shop') }}" class="flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm rounded-2xl transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/30">
+                    <a href="/uas" class="flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm rounded-2xl transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/30">
                         <span>Buka Project UAS</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
