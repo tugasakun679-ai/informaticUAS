@@ -11,7 +11,7 @@
         .main-layout { display: flex; flex: 1; overflow: hidden; }
         aside { width: 240px; background: #1e293b; border-right: 1px solid #334155; padding: 16px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
         aside a { display: block; background: #334155; color: #f8fafc; text-decoration: none; padding: 12px 14px; border-radius: 8px; font-weight: 600; font-size: 13px; transition: background 0.2s; }
-        aside a:hover, aside a.btn-data { background: #0284c7; color: #fff; }
+        aside a:hover, aside a.active { background: #0284c7; color: #fff; }
         main { flex: 1; background: #f8fafc; height: 100%; border: none; }
         iframe { width: 100%; height: 100%; border: none; }
         @media (max-width: 768px) {
@@ -29,15 +29,21 @@
     </header>
     <div class="main-layout">
         <aside>
-            <a href="home.html" target="konten">🏠 Home</a>
-            <a href="fashion.html" target="konten">👕 List Fashion</a>
-            <a href="aboutme.html" target="konten">👤 About Me</a>
-            <a href="form/form.php" target="konten">📝 Form Pendaftaran</a>
-            <a href="form/data.php" target="konten" class="btn-data">📊 Data Pendaftaran</a>
+            <a href="home.html" target="konten" class="active" onclick="setActive(this)">🏠 Home</a>
+            <a href="fashion.html" target="konten" onclick="setActive(this)">👕 List Fashion</a>
+            <a href="aboutme.html" target="konten" onclick="setActive(this)">👤 About Me</a>
+            <a href="form/form.php" target="konten" onclick="setActive(this)">📝 Form Pendaftaran</a>
+            <a href="form/data.php" target="konten" onclick="setActive(this)">📊 Data Pendaftaran</a>
         </aside>
         <main>
             <iframe src="home.html" name="konten"></iframe>
         </main>
     </div>
+    <script>
+    function setActive(el) {
+        document.querySelectorAll('aside a').forEach(a => a.classList.remove('active'));
+        el.classList.add('active');
+    }
+    </script>
 </body>
 </html>
