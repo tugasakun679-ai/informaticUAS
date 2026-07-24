@@ -1,12 +1,43 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <title>INFORMATIC STORE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFORMATIC STORE — Project UTS</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; background: #0f172a; }
+        header { height: 60px; background: #1e293b; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 2px solid #334155; flex-shrink: 0; }
+        .main-layout { display: flex; flex: 1; overflow: hidden; }
+        aside { width: 240px; background: #1e293b; border-right: 1px solid #334155; padding: 16px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+        aside a { display: block; background: #334155; color: #f8fafc; text-decoration: none; padding: 12px 14px; border-radius: 8px; font-weight: 600; font-size: 13px; transition: background 0.2s; }
+        aside a:hover, aside a.btn-data { background: #0284c7; color: #fff; }
+        main { flex: 1; background: #f8fafc; height: 100%; border: none; }
+        iframe { width: 100%; height: 100%; border: none; }
+        @media (max-width: 768px) {
+            body { overflow-y: auto; height: auto; }
+            .main-layout { flex-direction: column; }
+            aside { width: 100%; }
+            main { height: 500px; }
+        }
+    </style>
 </head>
-<frameset rows="85,*">
-    <frame src="header.html" name="header">
-    <frameset cols="25%,75%">
-        <frame src="menu.html" name="Menu">
-        <frame src="home.html" name="konten">
-    </frameset>
-</frameset>
+<body>
+    <header>
+        <h2 style="color: #38bdf8; font-size: 16px;">INFORMATIC STORE — PROJECT UTS</h2>
+        <a href="/" style="color: #94a3b8; text-decoration: none; font-size: 13px;">&larr; Kembali ke Portal Utama</a>
+    </header>
+    <div class="main-layout">
+        <aside>
+            <a href="home.html" target="konten">🏠 Home</a>
+            <a href="fashion.html" target="konten">👕 List Fashion</a>
+            <a href="aboutme.html" target="konten">👤 About Me</a>
+            <a href="form/form.php" target="konten">📝 Form Pendaftaran</a>
+            <a href="form/data.php" target="konten" class="btn-data">📊 Data Pendaftaran</a>
+        </aside>
+        <main>
+            <iframe src="home.html" name="konten"></iframe>
+        </main>
+    </div>
+</body>
 </html>
