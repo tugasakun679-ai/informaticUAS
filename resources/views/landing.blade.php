@@ -136,11 +136,11 @@
             <div class="card card-uts">
                 <div class="card-title">📌 Project UTS</div>
                 <div class="card-desc">
-                    Sistem Informasi Pendaftaran Siswa &amp; Katalog Sederhana.
+                    Sistem Informasi Katalog &amp; Profil Informatic Store.
                 </div>
                 <div class="card-features">
-                    <div>✓ Form &amp; Data Pendaftaran Siswa (Database MySQL)</div>
-                    <div>✓ List Catalog Fashion Sederhana</div>
+                    <div>✓ Katalog List Fashion Informatic Store</div>
+                    <div>✓ Informasi About Me &amp; Profil</div>
                 </div>
                 <a href="/store/index.html" class="btn btn-uts">👉 BUKA PROJECT UTS</a>
             </div>
