@@ -58,7 +58,9 @@
                     <!-- Image -->
                     <div class="relative aspect-square w-full bg-slate-950/40 overflow-hidden border-b border-slate-850">
                         @if($barang->gambar)
-                            <img src="{{ asset('storage/' . $barang->gambar) }}" alt="{{ $barang->nama_barang }}" 
+                            <img src="{{ asset('storage/' . $barang->gambar) }}" 
+                                 onerror="this.onerror=null;this.src='{{ asset('store/gambar/' . basename($barang->gambar)) }}';" 
+                                 alt="{{ $barang->nama_barang }}" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full flex flex-col items-center justify-center text-slate-600 bg-slate-900/50">

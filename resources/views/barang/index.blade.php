@@ -46,7 +46,7 @@
                                 <td class="px-6 py-4 flex justify-center">
                                     <div class="h-12 w-12 rounded-xl bg-slate-900 border border-slate-800 overflow-hidden flex items-center justify-center">
                                         @if($barang->gambar)
-                                            <img src="{{ asset('storage/' . $barang->gambar) }}" alt="" class="h-full w-full object-cover">
+                                            <img src="{{ asset('storage/' . $barang->gambar) }}" onerror="this.onerror=null;this.src='{{ asset('store/gambar/' . basename($barang->gambar)) }}';" alt="" class="h-full w-full object-cover">
                                         @else
                                             <i class="fa-solid fa-image text-slate-700 text-lg"></i>
                                         @endif

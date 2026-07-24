@@ -46,7 +46,9 @@
             <!-- Image Panel -->
             <div class="bg-slate-950/40 rounded-2xl border border-slate-850 p-4 flex items-center justify-center aspect-square overflow-hidden max-h-[380px] md:max-h-none">
                 @if($barang->gambar)
-                    <img src="{{ asset('storage/' . $barang->gambar) }}" alt="{{ $barang->nama_barang }}" 
+                    <img src="{{ asset('storage/' . $barang->gambar) }}" 
+                         onerror="this.onerror=null;this.src='{{ asset('store/gambar/' . basename($barang->gambar)) }}';" 
+                         alt="{{ $barang->nama_barang }}" 
                          class="w-full h-full object-contain rounded-xl">
                 @else
                     <div class="flex flex-col items-center justify-center text-slate-600">
