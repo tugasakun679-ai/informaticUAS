@@ -1,11 +1,13 @@
 <?php
-include "koneksi.php";
+// Menggunakan file koneksi yang sama dengan simpan.php/proses.php
+include("connect.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pendaftaran - UTS</title>
     <style>
         body {
@@ -65,13 +67,6 @@ include "koneksi.php";
         tr:hover {
             background-color: #f8fafc;
         }
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-        }
         .btn-action {
             display: inline-block;
             padding: 4px 8px;
@@ -97,7 +92,7 @@ include "koneksi.php";
 <div class="container">
     <?php if(isset($_GET['msg']) && $_GET['msg'] == 'success'): ?>
     <div style="background-color:#dcfce7; border:2px solid #22c55e; color:#15803d; padding:14px; border-radius:8px; margin-bottom:16px; font-weight:bold; text-align:center;">
-        ✓ Data pendaftaran baru berhasil ditambahkan dan tersimpan di tabel bawah ini!
+        ✓ Data pendaftaran baru berhasil ditambahkan dan tersimpan!
     </div>
     <?php endif; ?>
 
@@ -131,9 +126,12 @@ include "koneksi.php";
             $no = 1;
             $rows = [];
 
-            // 1. Fetch from MySQL if connected
-            if (isset($koneksi) && $koneksi instanceof mysqli) {
-                $data = @mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
+            // 1. Ambil dari Database MySQL (Mendukung variabel $conn atau $koneksi)
+            $db_connection = $conn ?? $koneksi ?? null;
+
+            if ($db_connection && $db_connection instanceof mysqli) {
+                $query = "SELECT * FROM pendaftarans ORDER BY id DESC";
+                $data = @mysqli_query($db_connection, $query);
                 if ($data && $data instanceof mysqli_result && mysqli_num_rows($data) > 0) {
                     while($d = mysqli_fetch_assoc($data)){
                         $rows[] = $d;
@@ -141,13 +139,16 @@ include "koneksi.php";
                 }
             }
 
-            // 2. Read from JSON backup file as fallback/merge
+            // 2. Ambil dari file JSON Backup jika belum ada di database
             $json_file = __DIR__ . '/pendaftarans_backup.json';
             if (file_exists($json_file)) {
-                $json_data = json_decode(file_get_contents($json_file), true) ?: [];
+                $json_content = file_get_contents($json_file);
+                $json_data = json_decode($json_content, true) ?: [];
+                
                 foreach ($json_data as $j_item) {
                     $exists = false;
                     foreach ($rows as $r) {
+                        // Cek apakah data sudah ada berdasarkan nama
                         if (strtolower(trim($r['nama'] ?? '')) === strtolower(trim($j_item['nama'] ?? ''))) {
                             $exists = true;
                             break;
@@ -159,27 +160,28 @@ include "koneksi.php";
                 }
             }
 
+            // 3. Tampilkan seluruh data
             if (count($rows) > 0) {
                 foreach($rows as $d){
             ?>
                 <tr>
-                    <td><?=$no++; ?></td>
-                    <td><strong><?=htmlspecialchars($d['nama'] ?? '-'); ?></strong></td>
-                    <td><?=htmlspecialchars($d['tempat_lahir'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['tanggal_lahir'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['jk'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['alamat'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['sekolah_asal'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['nama_sekolah'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['matematika'] ?? $d['mtk'] ?? '0'); ?></td>
-                    <td><?=htmlspecialchars($d['inggris'] ?? '0'); ?></td>
-                    <td><?=htmlspecialchars($d['indonesia'] ?? $d['indo'] ?? '0'); ?></td>
-                    <td><?=htmlspecialchars($d['pilihan1'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['pilihan2'] ?? '-'); ?></td>
-                    <td><?=htmlspecialchars($d['alasan'] ?? '-'); ?></td>
+                    <td><?= $no++; ?></td>
+                    <td><strong><?= htmlspecialchars($d['nama'] ?? '-'); ?></strong></td>
+                    <td><?= htmlspecialchars($d['tempat_lahir'] ?? $d['tempat'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['tanggal_lahir'] ?? $d['tgl'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['jk'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['alamat'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['sekolah_asal'] ?? $d['sekolah'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['nama_sekolah'] ?? $d['sekolah_nama'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['matematika'] ?? $d['mtk'] ?? '0'); ?></td>
+                    <td><?= htmlspecialchars($d['inggris'] ?? '0'); ?></td>
+                    <td><?= htmlspecialchars($d['indonesia'] ?? $d['indo'] ?? '0'); ?></td>
+                    <td><?= htmlspecialchars($d['pilihan1'] ?? $d['jurusan1'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['pilihan2'] ?? $d['jurusan2'] ?? '-'); ?></td>
+                    <td><?= htmlspecialchars($d['alasan'] ?? '-'); ?></td>
                     <td style="white-space:nowrap;">
-                        <a href="edit.php?id=<?php echo $d['id'] ?? 1; ?>" class="btn-action btn-edit" onclick="return confirm('Yakin ingin mengubah data ini?')">Edit</a>
-                        <a href="hapus.php?id=<?php echo $d['id'] ?? 1; ?>" class="btn-action btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                        <a href="edit.php?id=<?= $d['id'] ?? 1; ?>" class="btn-action btn-edit" onclick="return confirm('Yakin ingin mengubah data ini?')">Edit</a>
+                        <a href="hapus.php?id=<?= $d['id'] ?? 1; ?>" class="btn-action btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
                     </td>
                 </tr>
             <?php 
@@ -198,7 +200,7 @@ include "koneksi.php";
 </div>
 
 <script>
-// === KODE PENANGANAN DATA PENDAFTARAN AMAN ===
+// === PENANGANAN DATA DARI LOCALSTORAGE BROWSER ===
 function getDataPendaftaran() {
     try {
         let d1 = JSON.parse(localStorage.getItem('dataPendaftaran')) || [];
@@ -234,8 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
             localData.forEach(function(item) {
                 const existingNames = Array.from(tbody.querySelectorAll('tr td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
                 if (item.nama && !existingNames.includes(item.nama.trim().toLowerCase())) {
-                    const tempat = item.tempatLahir || item.tempat_lahir || '-';
-                    const tgl = item.tanggalLahir || item.tanggal_lahir || '-';
+                    const tempat = item.tempatLahir || item.tempat_lahir || item.tempat || '-';
+                    const tgl = item.tanggalLahir || item.tanggal_lahir || item.tgl || '-';
                     const tr = document.createElement('tr');
                     tr.style.backgroundColor = '#f0fdf4';
                     tr.innerHTML = `
@@ -245,13 +247,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${escapeHtml(tgl)}</td>
                         <td>${escapeHtml(item.jk || '-')}</td>
                         <td>${escapeHtml(item.alamat || '-')}</td>
-                        <td>${escapeHtml(item.sekolah_asal || '-')}</td>
-                        <td>${escapeHtml(item.nama_sekolah || '-')}</td>
-                        <td>${escapeHtml(item.matematika || '0')}</td>
+                        <td>${escapeHtml(item.sekolah_asal || item.sekolah || '-')}</td>
+                        <td>${escapeHtml(item.nama_sekolah || item.sekolah_nama || '-')}</td>
+                        <td>${escapeHtml(item.matematika || item.mtk || '0')}</td>
                         <td>${escapeHtml(item.inggris || '0')}</td>
-                        <td>${escapeHtml(item.indonesia || '0')}</td>
-                        <td>${escapeHtml(item.pilihan1 || '-')}</td>
-                        <td>${escapeHtml(item.pilihan2 || '-')}</td>
+                        <td>${escapeHtml(item.indonesia || item.indo || '0')}</td>
+                        <td>${escapeHtml(item.pilihan1 || item.jurusan1 || '-')}</td>
+                        <td>${escapeHtml(item.pilihan2 || item.jurusan2 || '-')}</td>
                         <td>${escapeHtml(item.alasan || '-')}</td>
                         <td style="white-space:nowrap;">
                             <span class="btn-action btn-edit" style="cursor:pointer;" onclick="alert('Data tersimpan di browser')">Edit</span>
@@ -281,4 +283,4 @@ function hapusLocalRow(btn, nama) {
 }
 </script>
 </body>
-</html>
+</html>
