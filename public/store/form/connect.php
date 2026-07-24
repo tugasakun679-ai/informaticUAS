@@ -10,4 +10,23 @@ $conn = @mysqli_connect($host,$user,$pass,$db,$port);
 if(!$conn){
     die("Koneksi gagal: ".mysqli_connect_error());
 }
+
+@mysqli_query($conn, "CREATE TABLE IF NOT EXISTS pendaftarans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    tempat_lahir VARCHAR(255) NOT NULL,
+    tanggal_lahir VARCHAR(255) NOT NULL,
+    jk VARCHAR(50) NOT NULL,
+    alamat TEXT NOT NULL,
+    sekolah_asal VARCHAR(255) NOT NULL,
+    nama_sekolah VARCHAR(255) NOT NULL,
+    matematika DOUBLE DEFAULT 0,
+    inggris DOUBLE DEFAULT 0,
+    indonesia DOUBLE DEFAULT 0,
+    pilihan1 VARCHAR(255) NOT NULL,
+    pilihan2 VARCHAR(255) NOT NULL,
+    alasan TEXT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 ?>

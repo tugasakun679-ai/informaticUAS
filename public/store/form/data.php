@@ -95,6 +95,12 @@ include "koneksi.php";
 <body>
 
 <div class="container">
+    <?php if(isset($_GET['msg']) && $_GET['msg'] == 'success'): ?>
+    <div style="background-color:#dcfce7; border:2px solid #22c55e; color:#15803d; padding:14px; border-radius:8px; margin-bottom:16px; font-weight:bold; text-align:center;">
+        ✓ Data pendaftaran baru berhasil ditambahkan dan tersimpan di tabel bawah ini!
+    </div>
+    <?php endif; ?>
+
     <h2>Data Pendaftaran Siswa (UTS)</h2>
     
     <a href="form.php" class="btn-add">+ Tambah Pendaftaran Baru</a>

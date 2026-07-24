@@ -115,7 +115,7 @@ if(!$simpan){
         <p><strong>Tanggal Daftar :</strong> <?php echo $tanggal_daftar; ?></p>
 
         <div class="btn-group">
-            <a href="data.php" class="btn btn-primary">Lihat Tabel Data Pendaftaran &rarr;</a>
+            <a href="data.php?msg=success" class="btn btn-primary">Lihat Tabel Data Pendaftaran &rarr;</a>
             <a href="form.php" class="btn btn-secondary">+ Tambah Data Lagi</a>
         </div>
     </div>
