@@ -3,170 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal Tugas Kuliah Pemrograman Web - UTS & UAS">
-    <title>Portal Tugas Pemrograman Web</title>
-    <!-- Tailwind Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        outfit: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Portal Tugas Pemrograman Web - UTS & UAS</title>
     <style>
-        .glass-card {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .glass-card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.15);
+        html, body {
+            min-height: 100vh;
+            overflow-y: auto !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+        }
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        p.subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+        .card {
+            background: #151d2a;
+            border: 1px solid #243044;
+            border-radius: 20px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-4px);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .icon-uts {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .icon-uas {
+            background: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .tech-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .tag-uts { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .tag-uas { background: rgba(14, 165, 233, 0.15); color: #38bdf8; }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .features {
+            list-style: none;
+            border-top: 1px solid #243044;
+            padding-top: 16px;
+            margin-bottom: 28px;
+        }
+        .features li {
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .features li::before {
+            content: "✓";
+            font-weight: bold;
+        }
+        .features-uts li::before { color: #fbbf24; }
+        .features-uas li::before { color: #38bdf8; }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s ease, opacity 0.2s ease;
+        }
+        .btn-uts {
+            background: #f59e0b;
+            color: #000000;
+        }
+        .btn-uts:hover {
+            background: #d97706;
+        }
+        .btn-uas {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .btn-uas:hover {
+            background: #0369a1;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between relative overflow-y-auto font-sans antialiased">
-    <!-- Subtle Background Ambient Glows -->
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
-    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
-
-    <!-- Main Wrapper -->
-    <div class="container mx-auto px-4 py-8 sm:py-16 flex-grow flex flex-col justify-center items-center z-10 max-w-5xl relative">
-        
-        <!-- Top Badge & Header -->
-        <div class="text-center space-y-4 max-w-2xl mb-12 sm:mb-16">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 text-sky-400 text-xs font-semibold border border-sky-500/20 shadow-inner">
-                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-                Pemrograman Web — Portal Tugas Project
-            </div>
-            <h1 class="font-outfit font-extrabold text-4xl sm:text-6xl text-white tracking-tight leading-tight">
-                Pilih Aplikasi <span class="bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">Project</span>
-            </h1>
-            <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-                Akses hasil tugas praktikum dan ujian akhir semester. Silakan pilih sistem yang ingin Anda buka di bawah ini.
-            </p>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="badge">Portal Pemrograman Web</div>
+            <h1>Pilih Tugas Application</h1>
+            <p class="subtitle">Silakan pilih sistem aplikasi di bawah ini untuk mengakses tugas UTS atau UAS.</p>
         </div>
 
-        <!-- Project Choice Cards (UTS & UAS) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full">
-            
-            <!-- UTS Project Card -->
-            <div class="glass-card rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1">
-                <div class="space-y-6">
-                    <!-- Icon & Header -->
-                    <div class="flex items-center justify-between">
-                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-amber-500/10 text-amber-300 border border-amber-500/20">
-                            PHP Native
-                        </span>
+        <div class="grid">
+            <!-- UTS Card -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon icon-uts">UTS</div>
+                        <span class="tech-tag tag-uts">PHP Native</span>
                     </div>
-
-                    <!-- Title & Description -->
-                    <div class="space-y-2">
-                        <h2 class="font-outfit font-bold text-2xl text-white group-hover:text-amber-400 transition-colors">
-                            Project UTS
-                        </h2>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                            Sistem Pendaftaran Siswa &amp; Katalog Sederhana. Menggunakan HTML frameset klasik dengan integrasi database MySQL.
-                        </p>
+                    <div class="card-title">Tugas UTS</div>
+                    <div class="card-desc">
+                        Sistem Informasi Pendaftaran Siswa &amp; Katalog Sederhana. Dikembangkan dengan HTML Native dan PHP Native.
                     </div>
-
-                    <!-- Highlights List -->
-                    <div class="pt-2 space-y-2 border-t border-slate-800/80">
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
-                            <span>Form &amp; Data Pendaftaran Siswa</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
-                            <span>List Catalog Fashion (UTS)</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-amber-400 text-[10px]"></i>
-                            <span>Layout Classic Frameset</span>
-                        </div>
-                    </div>
+                    <ul class="features features-uts">
+                        <li>Form &amp; Data Pendaftaran Siswa</li>
+                        <li>Katalog Fashion Sederhana</li>
+                        <li>Koneksi Database MySQL</li>
+                    </ul>
                 </div>
-
-                <!-- CTA Button -->
-                <div class="pt-8 relative z-20">
-                    <a href="/store/index.html" class="relative z-20 cursor-pointer flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-sm rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg shadow-amber-500/5">
-                        <span>Buka Project UTS</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
+                <a href="/store/index.html" class="btn btn-uts">Buka Project UTS &rarr;</a>
             </div>
 
-            <!-- UAS Project Card -->
-            <div class="glass-card rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1">
-                <div class="space-y-6">
-                    <!-- Icon & Header -->
-                    <div class="flex items-center justify-between">
-                        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-store"></i>
-                        </div>
-                        <span class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-sky-500/10 text-sky-300 border border-sky-500/20">
-                            Laravel + Tailwind
-                        </span>
+            <!-- UAS Card -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="card-icon icon-uas">UAS</div>
+                        <span class="tech-tag tag-uas">Laravel Framework</span>
                     </div>
-
-                    <!-- Title & Description -->
-                    <div class="space-y-2">
-                        <h2 class="font-outfit font-bold text-2xl text-white group-hover:text-sky-400 transition-colors">
-                            Project UAS (Informatics Store)
-                        </h2>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                            Platform E-Commerce &amp; Admin Panel modern dengan fitur katalog produk, form pemesanan barang, serta kelola inventoris.
-                        </p>
+                    <div class="card-title">Tugas UAS (Store)</div>
+                    <div class="card-desc">
+                        Informatics Store: E-Commerce &amp; Admin Panel modern lengkap dengan katalog produk dan kelola barang.
                     </div>
-
-                    <!-- Highlights List -->
-                    <div class="pt-2 space-y-2 border-t border-slate-800/80">
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-sky-400 text-[10px]"></i>
-                            <span>Katalog Produk &amp; Pemesanan</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-sky-400 text-[10px]"></i>
-                            <span>Dashboard Admin &amp; CRUD Inventaris</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-xs text-slate-300">
-                            <i class="fa-solid fa-check text-sky-400 text-[10px]"></i>
-                            <span>Manajemen Data Pendaftaran</span>
-                        </div>
-                    </div>
+                    <ul class="features features-uas">
+                        <li>Katalog Produk &amp; Form Pemesanan</li>
+                        <li>Dashboard Admin &amp; CRUD Inventaris</li>
+                        <li>Manajemen Pendaftaran</li>
+                    </ul>
                 </div>
-
-                <!-- CTA Button -->
-                <div class="pt-8 relative z-20">
-                    <a href="/uas" class="relative z-20 cursor-pointer flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm rounded-2xl transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/30">
-                        <span>Buka Project UAS</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
+                <a href="/uas" class="btn btn-uas">Buka Project UAS &rarr;</a>
             </div>
+        </div>
 
+        <div class="footer">
+            &copy; <?php echo date('Y'); ?> Informatics Store — Portal Pemrograman Web
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-900 bg-slate-950/80 backdrop-blur-md z-10">
-        <p>&copy; {{ date('Y') }} Informatics Store — Portal Tugas Pemrograman Web</p>
-    </footer>
 </body>
 </html>
+
 
