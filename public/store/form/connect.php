@@ -7,7 +7,7 @@ $db   = $_ENV['DB_DATABASE'] ?? getenv('DB_DATABASE') ?: ($_ENV['MYSQLDATABASE']
 
 $conn = @mysqli_connect($host,$user,$pass,$db,$port);
 
-if($conn){
+if($conn && $conn instanceof mysqli){
     @mysqli_query($conn, "CREATE TABLE IF NOT EXISTS pendaftarans (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nama VARCHAR(255) NOT NULL,
@@ -26,5 +26,7 @@ if($conn){
         created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+} else {
+    $conn = null;
 }
 ?>

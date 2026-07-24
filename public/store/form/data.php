@@ -132,10 +132,12 @@ include "koneksi.php";
             $rows = [];
 
             // 1. Fetch from MySQL if connected
-            $data = @mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
-            if ($data && mysqli_num_rows($data) > 0) {
-                while($d = mysqli_fetch_assoc($data)){
-                    $rows[] = $d;
+            if (isset($koneksi) && $koneksi instanceof mysqli) {
+                $data = @mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
+                if ($data && $data instanceof mysqli_result && mysqli_num_rows($data) > 0) {
+                    while($d = mysqli_fetch_assoc($data)){
+                        $rows[] = $d;
+                    }
                 }
             }
 

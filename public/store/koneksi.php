@@ -6,7 +6,7 @@ $password = $_ENV['DB_PASSWORD'] ?? getenv('DB_PASSWORD') ?: ($_ENV['MYSQLPASSWO
 $database = $_ENV['DB_DATABASE'] ?? getenv('DB_DATABASE') ?: ($_ENV['MYSQLDATABASE'] ?? getenv('MYSQLDATABASE') ?: 'storeadmin');
 
 $koneksi = @mysqli_connect($host, $user, $password, $database, $port);
-if($koneksi){
+if($koneksi && $koneksi instanceof mysqli){
     @mysqli_query($koneksi, "CREATE TABLE IF NOT EXISTS pendaftarans (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nama VARCHAR(255) NOT NULL,
@@ -25,5 +25,7 @@ if($koneksi){
         created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+} else {
+    $koneksi = null;
 }
 ?>
