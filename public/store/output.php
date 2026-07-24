@@ -169,7 +169,7 @@ $simpan = @mysqli_query($koneksi,$query);
         array_unshift($existing, $new_item);
         file_put_contents($json_file, json_encode($existing, JSON_PRETTY_PRINT));
 
-        echo "<script>alert('✅ Data Pendaftaran Berhasil Disimpan & Terdaftar di Fitur Data!'); window.location.href='form/data.php?msg=success';</script>";
+        header("Location: form/data.php?msg=success");
         exit;
     }
 }

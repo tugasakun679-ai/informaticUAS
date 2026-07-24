@@ -2,30 +2,31 @@
 include("connect.php");
 
 $nama = $_POST['nama'] ?? '';
-$tempat = $_POST['tempat_lahir'] ?? '';
-$tgl = $_POST['tanggal_lahir'] ?? '';
+$tempat = $_POST['tempat_lahir'] ?? $_POST['tempat'] ?? '';
+$tgl = $_POST['tanggal_lahir'] ?? $_POST['tgl'] ?? '';
 $jk = $_POST['jk'] ?? '-';
 $alamat = $_POST['alamat'] ?? '';
 $sekolah = $_POST['sekolah'] ?? '-';
-$sekolah_nama  = $_POST['sekolah_nama'] ?? '';
+$sekolah_nama  = $_POST['sekolah_nama'] ?? $_POST['nama_sekolah'] ?? '';
 $mtk = $_POST['mtk'] ?? 0;
 $inggris = $_POST['inggris'] ?? 0;
 $indo = $_POST['indo'] ?? 0;
-$jurusan1 = $_POST['jurusan1'] ?? '';
-$jurusan2 = $_POST['jurusan2'] ?? '';
+$jurusan1 = $_POST['jurusan1'] ?? $_POST['pil1'] ?? '';
+$jurusan2 = $_POST['jurusan2'] ?? $_POST['pil2'] ?? '';
 $alasan = $_POST['alasan'] ?? '';
 
 if(!empty($nama)){
-    $query = "INSERT INTO pendaftarans
-    (nama, tempat_lahir, tanggal_lahir, jk, alamat,
-     sekolah_asal, nama_sekolah, matematika, inggris,
-     indonesia, pilihan1, pilihan2, alasan, created_at, updated_at)
-    VALUES
-    ('$nama','$tempat','$tgl','$jk','$alamat',
-     '$sekolah','$sekolah_nama','$mtk','$inggris',
-     '$indo','$jurusan1','$jurusan2','$alasan', NOW(), NOW())";
-
-    @mysqli_query($conn, $query);
+    if (isset($conn) && $conn instanceof mysqli) {
+        $query = "INSERT INTO pendaftarans
+        (nama, tempat_lahir, tanggal_lahir, jk, alamat,
+         sekolah_asal, nama_sekolah, matematika, inggris,
+         indonesia, pilihan1, pilihan2, alasan, created_at, updated_at)
+        VALUES
+        ('$nama','$tempat','$tgl','$jk','$alamat',
+         '$sekolah','$sekolah_nama','$mtk','$inggris',
+         '$indo','$jurusan1','$jurusan2','$alasan', NOW(), NOW())";
+        @mysqli_query($conn, $query);
+    }
 
     $json_file = __DIR__ . '/pendaftarans_backup.json';
     $existing = [];
@@ -52,6 +53,6 @@ if(!empty($nama)){
     file_put_contents($json_file, json_encode($existing, JSON_PRETTY_PRINT));
 }
 
-echo "<script>alert('✅ Data Pendaftaran Berhasil Disimpan & Terdaftar di Fitur Data!'); window.location.href='data.php?msg=success';</script>";
+header("Location: data.php?msg=success");
 exit;
 ?>
