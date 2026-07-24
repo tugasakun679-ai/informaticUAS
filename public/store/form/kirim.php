@@ -36,31 +36,85 @@ if(!$simpan){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
     <title>Hasil Pendaftaran</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #166534;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+        p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        ul {
+            margin: 6px 0 12px 20px;
+            font-size: 14px;
+        }
+        .btn-group {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .btn-primary { background: #0284c7; color: white; }
+        .btn-secondary { background: #e2e8f0; color: #334155; }
+    </style>
 </head>
 <body>
-    <h2>Hasil Pendaftaran</h2>
-    <p>Nama : <?php echo $nama; ?></p>
-    <p>Tempat Lahir : <?php echo $tempat; ?></p>
-    <p>Tanggal Lahir : <?php echo $tgl; ?></p>
-    <p>Jenis Kelamin : <?php echo $jk; ?></p>
-    <p>Alamat : <?php echo $alamat; ?></p>
-    <p>Sekolah Asal : <?php echo $sekolah; ?></p>
-    <p>Sekolah Nama : <?php echo $sekolah_nama; ?></p>
-    <p>Nilai UAN :</p>
-    <ul>
-        <li>Matematika : <?php echo $mtk; ?></li>
-        <li>Bahasa Inggris : <?php echo $inggris; ?></li>
-        <li>Bahasa Indonesia : <?php echo $indo; ?></li>
-    </ul>
-    <p>Jurusan yang dipilih :</p>
-    <ul>
-        <li>Pilihan 1 : <?php echo $jurusan1; ?></li>
-        <li>Pilihan 2 : <?php echo $jurusan2; ?></li>
-    </ul>
-    <p>Alasan Masuk UNiROW : <?php echo $alasan; ?></p>
-    <p>TANGGAL DAFTAR : <?php echo $tanggal_daftar; ?></p>
+    <div class="container">
+        <h2>Pendaftaran Berhasil Disimpan!</h2>
+        <p><strong>Nama :</strong> <?php echo htmlspecialchars($nama); ?></p>
+        <p><strong>Tempat Lahir :</strong> <?php echo htmlspecialchars($tempat); ?></p>
+        <p><strong>Tanggal Lahir :</strong> <?php echo htmlspecialchars($tgl); ?></p>
+        <p><strong>Jenis Kelamin :</strong> <?php echo htmlspecialchars($jk); ?></p>
+        <p><strong>Alamat :</strong> <?php echo htmlspecialchars($alamat); ?></p>
+        <p><strong>Sekolah Asal :</strong> <?php echo htmlspecialchars($sekolah); ?></p>
+        <p><strong>Nama Sekolah :</strong> <?php echo htmlspecialchars($sekolah_nama); ?></p>
+        <p><strong>Nilai UAN :</strong></p>
+        <ul>
+            <li>Matematika : <?php echo $mtk; ?></li>
+            <li>Bahasa Inggris : <?php echo $inggris; ?></li>
+            <li>Bahasa Indonesia : <?php echo $indo; ?></li>
+        </ul>
+        <p><strong>Jurusan Pilihan :</strong></p>
+        <ul>
+            <li>Pilihan 1 : <?php echo htmlspecialchars($jurusan1); ?></li>
+            <li>Pilihan 2 : <?php echo htmlspecialchars($jurusan2); ?></li>
+        </ul>
+        <p><strong>Alasan :</strong> <?php echo htmlspecialchars($alasan); ?></p>
+        <p><strong>Tanggal Daftar :</strong> <?php echo $tanggal_daftar; ?></p>
+
+        <div class="btn-group">
+            <a href="data.php" class="btn btn-primary">Lihat Tabel Data Pendaftaran &rarr;</a>
+            <a href="form.php" class="btn btn-secondary">+ Tambah Data Lagi</a>
+        </div>
+    </div>
 </body>
 </html>

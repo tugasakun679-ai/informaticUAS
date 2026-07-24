@@ -13,220 +13,150 @@
         html, body {
             min-height: 100vh;
             overflow-y: auto !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0b0f19;
-            color: #f1f5f9;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
         }
-        .wrapper {
-            max-width: 900px;
+        .container {
+            max-width: 650px;
             margin: 0 auto;
-            padding: 40px 20px 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            padding: 30px 16px 60px 16px;
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            padding-top: 10px;
         }
         .badge {
             display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            background: rgba(14, 165, 233, 0.15);
-            color: #38bdf8;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-bottom: 16px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
+            background-color: #0284c7;
             color: #ffffff;
-            margin-bottom: 12px;
-            line-height: 1.2;
-        }
-        p.subtitle {
-            color: #94a3b8;
-            font-size: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            width: 100%;
-        }
-        .card {
-            background: #151d2a;
-            border: 1px solid #243044;
-            border-radius: 20px;
-            padding: 32px 28px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .card:hover {
-            border-color: #38bdf8;
-            transform: translateY(-4px);
-        }
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .icon-uts {
-            background: rgba(245, 158, 11, 0.15);
-            color: #fbbf24;
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-        .icon-uas {
-            background: rgba(14, 165, 233, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-        .tech-tag {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 4px 10px;
-            border-radius: 6px;
+            margin-bottom: 12px;
         }
-        .tag-uts { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-        .tag-uas { background: rgba(14, 165, 233, 0.15); color: #38bdf8; }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
             color: #ffffff;
             margin-bottom: 8px;
         }
-        .card-desc {
+        p.subtitle {
+            font-size: 14px;
             color: #94a3b8;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 20px;
         }
-        .features {
-            list-style: none;
-            border-top: 1px solid #243044;
-            padding-top: 16px;
-            margin-bottom: 28px;
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        .features li {
+        .card {
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .card-uts {
+            border-left: 6px solid #f59e0b;
+        }
+        .card-uas {
+            border-left: 6px solid #0284c7;
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .card-desc {
             font-size: 13px;
             color: #cbd5e1;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            line-height: 1.5;
+            margin-bottom: 16px;
         }
-        .features li::before {
-            content: "✓";
-            font-weight: bold;
+        .card-features {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
-        .features-uts li::before { color: #fbbf24; }
-        .features-uas li::before { color: #38bdf8; }
-
+        .card-features div {
+            margin-bottom: 4px;
+        }
         .btn {
             display: block;
             width: 100%;
-            padding: 14px 20px;
+            padding: 16px 20px;
             text-align: center;
             border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 800;
             text-decoration: none;
             cursor: pointer;
-            transition: background 0.2s ease, opacity 0.2s ease;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         .btn-uts {
-            background: #f59e0b;
-            color: #000000;
+            background-color: #f59e0b;
+            color: #0f172a;
         }
-        .btn-uts:hover {
-            background: #d97706;
+        .btn-uts:active, .btn-uts:hover {
+            background-color: #d97706;
         }
         .btn-uas {
-            background: #0284c7;
+            background-color: #0284c7;
             color: #ffffff;
         }
-        .btn-uas:hover {
-            background: #0369a1;
+        .btn-uas:active, .btn-uas:hover {
+            background-color: #0369a1;
         }
         .footer {
-            margin-top: 40px;
             text-align: center;
+            margin-top: 40px;
             font-size: 12px;
             color: #64748b;
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="container">
         <div class="header">
-            <div class="badge">Portal Pemrograman Web</div>
-            <h1>Pilih Tugas Application</h1>
-            <p class="subtitle">Silakan pilih sistem aplikasi di bawah ini untuk mengakses tugas UTS atau UAS.</p>
+            <span class="badge">Portal Mahasiswa</span>
+            <h1>Pilih Aplikasi Project</h1>
+            <p class="subtitle">Silakan ketuk tombol di bawah untuk membuka tugas UTS atau UAS</p>
         </div>
 
-        <div class="grid">
-            <!-- UTS Card -->
-            <div class="card">
-                <div>
-                    <div class="card-header">
-                        <div class="card-icon icon-uts">UTS</div>
-                        <span class="tech-tag tag-uts">PHP Native</span>
-                    </div>
-                    <div class="card-title">Tugas UTS</div>
-                    <div class="card-desc">
-                        Sistem Informasi Pendaftaran Siswa &amp; Katalog Sederhana. Dikembangkan dengan HTML Native dan PHP Native.
-                    </div>
-                    <ul class="features features-uts">
-                        <li>Form &amp; Data Pendaftaran Siswa</li>
-                        <li>Katalog Fashion Sederhana</li>
-                        <li>Koneksi Database MySQL</li>
-                    </ul>
+        <div class="card-list">
+            <!-- UTS Option -->
+            <div class="card card-uts">
+                <div class="card-title">📌 Project UTS (PHP Native)</div>
+                <div class="card-desc">
+                    Sistem Informasi Pendaftaran Siswa &amp; Katalog Sederhana.
                 </div>
-                <a href="/store/index.html" class="btn btn-uts">Buka Project UTS &rarr;</a>
+                <div class="card-features">
+                    <div>✓ Form &amp; Data Pendaftaran Siswa (Database MySQL)</div>
+                    <div>✓ List Catalog Fashion Sederhana</div>
+                </div>
+                <a href="/store/index.html" class="btn btn-uts">👉 BUKA PROJECT UTS</a>
             </div>
 
-            <!-- UAS Card -->
-            <div class="card">
-                <div>
-                    <div class="card-header">
-                        <div class="card-icon icon-uas">UAS</div>
-                        <span class="tech-tag tag-uas">Laravel Framework</span>
-                    </div>
-                    <div class="card-title">Tugas UAS (Store)</div>
-                    <div class="card-desc">
-                        Informatics Store: E-Commerce &amp; Admin Panel modern lengkap dengan katalog produk dan kelola barang.
-                    </div>
-                    <ul class="features features-uas">
-                        <li>Katalog Produk &amp; Form Pemesanan</li>
-                        <li>Dashboard Admin &amp; CRUD Inventaris</li>
-                        <li>Manajemen Pendaftaran</li>
-                    </ul>
+            <!-- UAS Option -->
+            <div class="card card-uas">
+                <div class="card-title">🛍️ Project UAS (Laravel Store)</div>
+                <div class="card-desc">
+                    Informatics Store: E-Commerce &amp; Admin Panel Pengelolaan Barang.
                 </div>
-                <a href="/uas" class="btn btn-uas">Buka Project UAS &rarr;</a>
+                <div class="card-features">
+                    <div>✓ Katalog Produk &amp; Form Pemesanan</div>
+                    <div>✓ Dashboard Admin &amp; CRUD Inventaris Barang</div>
+                    <div>✓ Kelola Pendaftaran &amp; Pesanan Masuk</div>
+                </div>
+                <a href="/uas" class="btn btn-uas">👉 BUKA PROJECT UAS</a>
             </div>
         </div>
 
@@ -236,5 +166,6 @@
     </div>
 </body>
 </html>
+
 
 
