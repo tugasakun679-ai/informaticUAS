@@ -101,16 +101,16 @@ include("connect.php");
     <a href="form.php" class="btn-add">+ Tambah Pendaftaran Baru</a>
 
     <div class="table-responsive">
-        <table>
+        <table border="1" style="width:100%; border-collapse: collapse; margin-top: 15px;">
             <thead>
-                <tr>
+                <tr style="background-color: #f1f5f9; color: #1e293b;">
                     <th>No</th>
-                    <th>Nama</th>
+                    <th>Nama Lengkap</th>
                     <th>Tempat Lahir</th>
-                    <th>Tgl Lahir</th>
+                    <th>Tanggal Lahir</th>
                     <th>L/P</th>
                     <th>Alamat</th>
-                    <th>Asal</th>
+                    <th>Sekolah Asal</th>
                     <th>Nama Sekolah</th>
                     <th>MTK</th>
                     <th>ING</th>
