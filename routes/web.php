@@ -9,16 +9,6 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
-// Temporary debug route to inspect environment variables
-Route::get('/debug-env', function () {
-    return [
-        'app_key_exists' => !empty(env('APP_KEY')),
-        'app_key_length' => strlen(env('APP_KEY')),
-        'app_env' => env('APP_ENV'),
-        'env_keys' => array_keys($_ENV),
-    ];
-});
-
 // UAS Sub-system
 Route::prefix('uas')->group(function () {
     // Shop (Front-end)
