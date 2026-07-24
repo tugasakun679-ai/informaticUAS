@@ -43,4 +43,13 @@ Route::prefix('uas')->group(function () {
     // Form Pendaftaran (customer-facing, but part of UAS admin system)
     Route::get('/daftar', [PendaftaranController::class, 'create'])->name('uas.daftar.create');
     Route::post('/daftar', [PendaftaranController::class, 'store'])->name('uas.daftar.store');
+// Helper route to seed database on Railway if needed
+Route::get('/seed-database', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return response('Database successfully migrated & seeded! <a href="/">Kembali ke Portal</a>');
+    } catch (\Throwable $e) {
+        return response('Error: ' . $e->getMessage(), 500);
+    }
 });
