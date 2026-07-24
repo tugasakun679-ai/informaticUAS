@@ -198,12 +198,34 @@ include "koneksi.php";
 </div>
 
 <script>
+// === KODE PENANGANAN DATA PENDAFTARAN AMAN ===
+function getDataPendaftaran() {
+    try {
+        let d1 = JSON.parse(localStorage.getItem('dataPendaftaran')) || [];
+        let d2 = JSON.parse(localStorage.getItem('uts_pendaftarans')) || [];
+        let combined = [...d1, ...d2];
+        let unique = [];
+        let names = new Set();
+        combined.forEach(item => {
+            if (item && item.nama) {
+                let key = item.nama.trim().toLowerCase();
+                if (!names.has(key)) {
+                    names.add(key);
+                    unique.push(item);
+                }
+            }
+        });
+        return unique;
+    } catch (e) {
+        return [];
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    let localData = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]');
+    let localData = getDataPendaftaran();
     if (localData.length > 0) {
         const tbody = document.querySelector('table tbody');
         if (tbody) {
-            // Remove 'Belum ada data' row if present
             const emptyRow = tbody.querySelector('td[colspan="15"]');
             if (emptyRow) {
                 emptyRow.closest('tr').remove();
@@ -212,23 +234,25 @@ document.addEventListener('DOMContentLoaded', function() {
             localData.forEach(function(item) {
                 const existingNames = Array.from(tbody.querySelectorAll('tr td:nth-child(2)')).map(td => td.textContent.trim().toLowerCase());
                 if (item.nama && !existingNames.includes(item.nama.trim().toLowerCase())) {
+                    const tempat = item.tempatLahir || item.tempat_lahir || '-';
+                    const tgl = item.tanggalLahir || item.tanggal_lahir || '-';
                     const tr = document.createElement('tr');
                     tr.style.backgroundColor = '#f0fdf4';
                     tr.innerHTML = `
                         <td>${tbody.children.length + 1}</td>
                         <td><strong>${escapeHtml(item.nama)}</strong> <span style="font-size:10px; background:#16a34a; color:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">Baru</span></td>
-                        <td>${escapeHtml(item.tempat_lahir)}</td>
-                        <td>${escapeHtml(item.tanggal_lahir)}</td>
-                        <td>${escapeHtml(item.jk)}</td>
-                        <td>${escapeHtml(item.alamat)}</td>
-                        <td>${escapeHtml(item.sekolah_asal)}</td>
-                        <td>${escapeHtml(item.nama_sekolah)}</td>
-                        <td>${escapeHtml(item.matematika)}</td>
-                        <td>${escapeHtml(item.inggris)}</td>
-                        <td>${escapeHtml(item.indonesia)}</td>
-                        <td>${escapeHtml(item.pilihan1)}</td>
-                        <td>${escapeHtml(item.pilihan2)}</td>
-                        <td>${escapeHtml(item.alasan)}</td>
+                        <td>${escapeHtml(tempat)}</td>
+                        <td>${escapeHtml(tgl)}</td>
+                        <td>${escapeHtml(item.jk || '-')}</td>
+                        <td>${escapeHtml(item.alamat || '-')}</td>
+                        <td>${escapeHtml(item.sekolah_asal || '-')}</td>
+                        <td>${escapeHtml(item.nama_sekolah || '-')}</td>
+                        <td>${escapeHtml(item.matematika || '0')}</td>
+                        <td>${escapeHtml(item.inggris || '0')}</td>
+                        <td>${escapeHtml(item.indonesia || '0')}</td>
+                        <td>${escapeHtml(item.pilihan1 || '-')}</td>
+                        <td>${escapeHtml(item.pilihan2 || '-')}</td>
+                        <td>${escapeHtml(item.alasan || '-')}</td>
                         <td style="white-space:nowrap;">
                             <span class="btn-action btn-edit" style="cursor:pointer;" onclick="alert('Data tersimpan di browser')">Edit</span>
                             <span class="btn-action btn-delete" style="cursor:pointer;" onclick="hapusLocalRow(this, '${escapeHtml(item.nama)}')">Hapus</span>
@@ -248,9 +272,10 @@ function escapeHtml(text) {
 
 function hapusLocalRow(btn, nama) {
     if (confirm('Yakin ingin menghapus data ini?')) {
-        let localData = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]');
-        localData = localData.filter(i => i.nama.trim().toLowerCase() !== nama.trim().toLowerCase());
-        localStorage.setItem('uts_pendaftarans', JSON.stringify(localData));
+        let d1 = JSON.parse(localStorage.getItem('dataPendaftaran') || '[]').filter(i => (i.nama || '').trim().toLowerCase() !== nama.trim().toLowerCase());
+        let d2 = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]').filter(i => (i.nama || '').trim().toLowerCase() !== nama.trim().toLowerCase());
+        localStorage.setItem('dataPendaftaran', JSON.stringify(d1));
+        localStorage.setItem('uts_pendaftarans', JSON.stringify(d2));
         btn.closest('tr').remove();
     }
 }

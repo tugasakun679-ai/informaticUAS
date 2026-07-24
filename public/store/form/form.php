@@ -196,10 +196,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const alasan = form.querySelector('[name="alasan"]')?.value || '-';
 
             if (nama.trim() !== '') {
-                let localData = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]');
                 const newItem = {
                     id: Date.now(),
                     nama: nama,
+                    tempatLahir: tempat,
+                    tanggalLahir: tgl,
                     tempat_lahir: tempat,
                     tanggal_lahir: tgl,
                     jk: jk,
@@ -213,8 +214,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     pilihan2: pil2,
                     alasan: alasan
                 };
-                localData.unshift(newItem);
-                localStorage.setItem('uts_pendaftarans', JSON.stringify(localData));
+
+                let dataPendaftaran = JSON.parse(localStorage.getItem('dataPendaftaran') || '[]');
+                dataPendaftaran.unshift(newItem);
+                localStorage.setItem('dataPendaftaran', JSON.stringify(dataPendaftaran));
+
+                let utsData = JSON.parse(localStorage.getItem('uts_pendaftarans') || '[]');
+                utsData.unshift(newItem);
+                localStorage.setItem('uts_pendaftarans', JSON.stringify(utsData));
             }
         });
     }
