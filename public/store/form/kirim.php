@@ -89,7 +89,10 @@ if(!$simpan){
 </head>
 <body>
     <div class="container">
-        <h2>Pendaftaran Berhasil Disimpan!</h2>
+        <div style="background-color:#dcfce7; border:2px solid #22c55e; color:#15803d; padding:16px; border-radius:10px; margin-bottom:20px; text-align:center; font-weight:bold; font-size:16px;">
+            ✓ DATA BERHASIL DISIMPAN &amp; TERDAFTAR KEDALAM FITUR DATA UTS!
+        </div>
+        <h2>Detail Hasil Pendaftaran</h2>
         <p><strong>Nama :</strong> <?php echo htmlspecialchars($nama); ?></p>
         <p><strong>Tempat Lahir :</strong> <?php echo htmlspecialchars($tempat); ?></p>
         <p><strong>Tanggal Lahir :</strong> <?php echo htmlspecialchars($tgl); ?></p>

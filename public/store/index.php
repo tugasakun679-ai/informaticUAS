@@ -115,7 +115,17 @@ if(isset($_POST['daftar']))
         $pil2      = $_POST['pil2'];
         $alasan    = $_POST['alasan'];
 
+        $tgl_lahir = $tahun . "-01-01";
+        $insert_sql = "INSERT INTO pendaftarans (nama, tempat_lahir, tanggal_lahir, jk, alamat, sekolah_asal, nama_sekolah, matematika, inggris, indonesia, pilihan1, pilihan2, alasan, created_at, updated_at) VALUES ('$nama', '$tempat', '$tgl_lahir', '$jk', '$alamat', '$sekolah', '$sekolah', '$mtk', '$inggris', '$indo', '$pil1', '$pil2', '$alasan', NOW(), NOW())";
+        @mysqli_query($koneksi, $insert_sql);
+
 ?>
+
+<div style="background-color:#dcfce7; border:2px solid #22c55e; color:#15803d; padding:16px; border-radius:10px; margin-bottom:20px; text-align:center; font-weight:bold; font-size:16px;">
+    ✓ DATA BERHASIL DISIMPAN &amp; TERDAFTAR KEDALAM SISTEM UTS!
+    <br>
+    <a href="form/data.php" style="display:inline-block; margin-top:10px; background:#0284c7; color:#ffffff; padding:8px 16px; text-decoration:none; border-radius:6px; font-size:14px; font-weight:bold;">Lihat Data Pendaftaran di Fitur Data &rarr;</a>
+</div>
 
 <div class="hasil">
 

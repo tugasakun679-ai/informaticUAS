@@ -134,7 +134,7 @@
         <div class="card-list">
             <!-- UTS Option -->
             <div class="card card-uts">
-                <div class="card-title">📌 Project UTS (PHP Native)</div>
+                <div class="card-title">📌 Project UTS</div>
                 <div class="card-desc">
                     Sistem Informasi Pendaftaran Siswa &amp; Katalog Sederhana.
                 </div>
@@ -147,7 +147,7 @@
 
             <!-- UAS Option -->
             <div class="card card-uas">
-                <div class="card-title">🛍️ Project UAS (Laravel Store)</div>
+                <div class="card-title">🛍️ Project UAS</div>
                 <div class="card-desc">
                     Informatics Store: E-Commerce &amp; Admin Panel Pengelolaan Barang.
                 </div>
