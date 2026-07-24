@@ -119,6 +119,30 @@ if(isset($_POST['daftar']))
         $insert_sql = "INSERT INTO pendaftarans (nama, tempat_lahir, tanggal_lahir, jk, alamat, sekolah_asal, nama_sekolah, matematika, inggris, indonesia, pilihan1, pilihan2, alasan, created_at, updated_at) VALUES ('$nama', '$tempat', '$tgl_lahir', '$jk', '$alamat', '$sekolah', '$sekolah', '$mtk', '$inggris', '$indo', '$pil1', '$pil2', '$alasan', NOW(), NOW())";
         @mysqli_query($koneksi, $insert_sql);
 
+        $json_file = __DIR__ . '/form/pendaftarans_backup.json';
+        $existing = [];
+        if(file_exists($json_file)){
+            $existing = json_decode(file_get_contents($json_file), true) ?: [];
+        }
+        $new_item = [
+            "id" => count($existing) + 1,
+            "nama" => $nama,
+            "tempat_lahir" => $tempat,
+            "tanggal_lahir" => $tgl_lahir,
+            "jk" => $jk,
+            "alamat" => $alamat,
+            "sekolah_asal" => $sekolah,
+            "nama_sekolah" => $sekolah,
+            "matematika" => $mtk,
+            "inggris" => $inggris,
+            "indonesia" => $indo,
+            "pilihan1" => $pil1,
+            "pilihan2" => $pil2,
+            "alasan" => $alasan
+        ];
+        array_unshift($existing, $new_item);
+        file_put_contents($json_file, json_encode($existing, JSON_PRETTY_PRINT));
+
         echo "<script>alert('✅ Data Pendaftaran Berhasil Disimpan & Terdaftar di Fitur Data!'); window.location.href='form/data.php?msg=success';</script>";
         exit;
     }

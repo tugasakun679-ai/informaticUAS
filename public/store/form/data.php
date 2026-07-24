@@ -129,39 +129,55 @@ include "koneksi.php";
             <tbody>
             <?php
             $no = 1;
-            $check = @mysqli_query($koneksi, "SELECT COUNT(*) as cnt FROM pendaftarans");
-            $row_cnt = $check ? mysqli_fetch_assoc($check)['cnt'] : 0;
+            $rows = [];
 
-            if ($row_cnt == 0) {
-                @mysqli_query($koneksi, "INSERT INTO pendaftarans (nama, tempat_lahir, tanggal_lahir, jk, alamat, sekolah_asal, nama_sekolah, matematika, inggris, indonesia, pilihan1, pilihan2, alasan, created_at, updated_at) VALUES
-                ('Ahmad Fauzi', 'Jakarta', '2002-05-14', 'Laki-laki', 'Jl. Merdeka No. 10, Jakarta Pusat', 'SMA', 'SMAN 1 Jakarta', 88, 90, 92, 'Teknik Informatika', 'Sistem Informasi', 'Berminat pada pengembangan perangkat lunak dan kecerdasan buatan.', NOW(), NOW()),
-                ('Siti Nurhaliza', 'Bandung', '2003-08-22', 'Perempuan', 'Jl. Asia Afrika No. 45, Bandung', 'SMA', 'SMAN 3 Bandung', 95, 92, 94, 'Teknik Informatika', 'Data Science', 'Ingin memperdalam ilmu analisis data dan machine learning.', NOW(), NOW()),
-                ('Budi Santoso', 'Surabaya', '2002-11-10', 'Laki-laki', 'Jl. Pemuda No. 12, Surabaya', 'SMK', 'SMKN 1 Surabaya', 82, 85, 88, 'Sistem Informasi', 'Teknik Informatika', 'Tertarik dengan manajemen sistem dan arsitektur database.', NOW(), NOW())");
-            }
-
-            $data = mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
-
+            // 1. Fetch from MySQL if connected
+            $data = @mysqli_query($koneksi, "SELECT * FROM pendaftarans ORDER BY id DESC");
             if ($data && mysqli_num_rows($data) > 0) {
                 while($d = mysqli_fetch_assoc($data)){
+                    $rows[] = $d;
+                }
+            }
+
+            // 2. Read from JSON backup file as fallback/merge
+            $json_file = __DIR__ . '/pendaftarans_backup.json';
+            if (file_exists($json_file)) {
+                $json_data = json_decode(file_get_contents($json_file), true) ?: [];
+                foreach ($json_data as $j_item) {
+                    $exists = false;
+                    foreach ($rows as $r) {
+                        if (strtolower(trim($r['nama'] ?? '')) === strtolower(trim($j_item['nama'] ?? ''))) {
+                            $exists = true;
+                            break;
+                        }
+                    }
+                    if (!$exists) {
+                        $rows[] = $j_item;
+                    }
+                }
+            }
+
+            if (count($rows) > 0) {
+                foreach($rows as $d){
             ?>
                 <tr>
                     <td><?=$no++; ?></td>
-                    <td><strong><?=htmlspecialchars($d['nama']); ?></strong></td>
-                    <td><?=htmlspecialchars($d['tempat_lahir']); ?></td>
-                    <td><?=htmlspecialchars($d['tanggal_lahir']); ?></td>
-                    <td><?=htmlspecialchars($d['jk']); ?></td>
-                    <td><?=htmlspecialchars($d['alamat']); ?></td>
-                    <td><?=htmlspecialchars($d['sekolah_asal']); ?></td>
-                    <td><?=htmlspecialchars($d['nama_sekolah']); ?></td>
-                    <td><?=$d['matematika']; ?></td>
-                    <td><?=$d['inggris']; ?></td>
-                    <td><?=$d['indonesia']; ?></td>
-                    <td><?=htmlspecialchars($d['pilihan1']); ?></td>
-                    <td><?=htmlspecialchars($d['pilihan2']); ?></td>
-                    <td><?=htmlspecialchars($d['alasan']); ?></td>
+                    <td><strong><?=htmlspecialchars($d['nama'] ?? '-'); ?></strong></td>
+                    <td><?=htmlspecialchars($d['tempat_lahir'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['tanggal_lahir'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['jk'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['alamat'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['sekolah_asal'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['nama_sekolah'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['matematika'] ?? $d['mtk'] ?? '0'); ?></td>
+                    <td><?=htmlspecialchars($d['inggris'] ?? '0'); ?></td>
+                    <td><?=htmlspecialchars($d['indonesia'] ?? $d['indo'] ?? '0'); ?></td>
+                    <td><?=htmlspecialchars($d['pilihan1'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['pilihan2'] ?? '-'); ?></td>
+                    <td><?=htmlspecialchars($d['alasan'] ?? '-'); ?></td>
                     <td style="white-space:nowrap;">
-                        <a href="edit.php?id=<?php echo $d['id']; ?>" class="btn-action btn-edit" onclick="return confirm('Yakin ingin mengubah data ini?')">Edit</a>
-                        <a href="hapus.php?id=<?php echo $d['id']; ?>" class="btn-action btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
+                        <a href="edit.php?id=<?php echo $d['id'] ?? 1; ?>" class="btn-action btn-edit" onclick="return confirm('Yakin ingin mengubah data ini?')">Edit</a>
+                        <a href="hapus.php?id=<?php echo $d['id'] ?? 1; ?>" class="btn-action btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
                     </td>
                 </tr>
             <?php 

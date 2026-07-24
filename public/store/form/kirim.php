@@ -26,6 +26,30 @@ if(!empty($nama)){
      '$indo','$jurusan1','$jurusan2','$alasan', NOW(), NOW())";
 
     @mysqli_query($conn, $query);
+
+    $json_file = __DIR__ . '/pendaftarans_backup.json';
+    $existing = [];
+    if(file_exists($json_file)){
+        $existing = json_decode(file_get_contents($json_file), true) ?: [];
+    }
+    $new_item = [
+        "id" => count($existing) + 1,
+        "nama" => $nama,
+        "tempat_lahir" => $tempat,
+        "tanggal_lahir" => $tgl,
+        "jk" => $jk,
+        "alamat" => $alamat,
+        "sekolah_asal" => $sekolah,
+        "nama_sekolah" => $sekolah_nama,
+        "matematika" => $mtk,
+        "inggris" => $inggris,
+        "indonesia" => $indo,
+        "pilihan1" => $jurusan1,
+        "pilihan2" => $jurusan2,
+        "alasan" => $alasan
+    ];
+    array_unshift($existing, $new_item);
+    file_put_contents($json_file, json_encode($existing, JSON_PRETTY_PRINT));
 }
 
 echo "<script>alert('✅ Data Pendaftaran Berhasil Disimpan & Terdaftar di Fitur Data!'); window.location.href='data.php?msg=success';</script>";

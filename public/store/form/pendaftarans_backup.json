@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nama": "Ahmad Fauzi",
+    "tempat_lahir": "Jakarta",
+    "tanggal_lahir": "2002-05-14",
+    "jk": "Laki-laki",
+    "alamat": "Jl. Merdeka No. 10, Jakarta Pusat",
+    "sekolah_asal": "SMA",
+    "nama_sekolah": "SMAN 1 Jakarta",
+    "matematika": "88",
+    "inggris": "90",
+    "indonesia": "92",
+    "pilihan1": "Teknik Informatika",
+    "pilihan2": "Sistem Informasi",
+    "alasan": "Berminat pada pengembangan perangkat lunak dan kecerdasan buatan."
+  },
+  {
+    "id": 2,
+    "nama": "Siti Nurhaliza",
+    "tempat_lahir": "Bandung",
+    "tanggal_lahir": "2003-08-22",
+    "jk": "Perempuan",
+    "alamat": "Jl. Asia Afrika No. 45, Bandung",
+    "sekolah_asal": "SMA",
+    "nama_sekolah": "SMAN 3 Bandung",
+    "matematika": "95",
+    "inggris": "92",
+    "indonesia": "94",
+    "pilihan1": "Teknik Informatika",
+    "pilihan2": "Data Science",
+    "alasan": "Ingin memperdalam ilmu analisis data dan machine learning."
+  },
+  {
+    "id": 3,
+    "nama": "Budi Santoso",
+    "tempat_lahir": "Surabaya",
+    "tanggal_lahir": "2002-11-10",
+    "jk": "Laki-laki",
+    "alamat": "Jl. Pemuda No. 12, Surabaya",
+    "sekolah_asal": "SMK",
+    "nama_sekolah": "SMKN 1 Surabaya",
+    "matematika": "82",
+    "inggris": "85",
+    "indonesia": "88",
+    "pilihan1": "Sistem Informasi",
+    "pilihan2": "Teknik Informatika",
+    "alasan": "Tertarik dengan manajemen sistem dan arsitektur database."
+  }
+]
