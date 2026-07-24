@@ -37,13 +37,13 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between relative overflow-hidden font-sans">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between relative overflow-y-auto font-sans antialiased">
     <!-- Subtle Background Ambient Glows -->
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
     <!-- Main Wrapper -->
-    <div class="container mx-auto px-4 py-12 sm:py-16 flex-grow flex flex-col justify-center items-center z-10 max-w-5xl">
+    <div class="container mx-auto px-4 py-8 sm:py-16 flex-grow flex flex-col justify-center items-center z-10 max-w-5xl relative">
         
         <!-- Top Badge & Header -->
         <div class="text-center space-y-4 max-w-2xl mb-12 sm:mb-16">
@@ -103,8 +103,8 @@
                 </div>
 
                 <!-- CTA Button -->
-                <div class="pt-8">
-                    <a href="/store/index.html" class="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-sm rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg shadow-amber-500/5">
+                <div class="pt-8 relative z-20">
+                    <a href="/store/index.html" class="relative z-20 cursor-pointer flex items-center justify-center gap-2 w-full py-3.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold text-sm rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 shadow-lg shadow-amber-500/5">
                         <span>Buka Project UTS</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
@@ -152,8 +152,8 @@
                 </div>
 
                 <!-- CTA Button -->
-                <div class="pt-8">
-                    <a href="/uas" class="flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm rounded-2xl transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/30">
+                <div class="pt-8 relative z-20">
+                    <a href="/uas" class="relative z-20 cursor-pointer flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm rounded-2xl transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/30">
                         <span>Buka Project UAS</span>
                         <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
